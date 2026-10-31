@@ -1,0 +1,12 @@
+[Unit]
+Description=blooper
+After=network.target
+
+[Service]
+User=adam
+Group=adam
+WorkingDirectory=/home/adam/blooper
+ExecStart=/home/adam/.poetry/bin/poetry run uvicorn blooper:app --uds /home/adam/blooper/blooper.sock
+
+[Install]
+WantedBy=multi-user.target

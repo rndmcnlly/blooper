@@ -1,0 +1,15 @@
+[Unit]
+Description=Avahi/mDNS CNAME publisher
+After=network.target avahi-daemon.service
+
+[Service]
+User=adam
+Group=adam
+Type=simple
+ExecStart=/usr/local/bin/mdns-publish-cname --ttl 604800 blooper.local
+Restart=always
+PrivateTmp=true
+PrivateDevices=true
+
+[Install]
+WantedBy=multi-user.target
