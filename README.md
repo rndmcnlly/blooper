@@ -32,7 +32,7 @@ Design choices worth reusing:
 - **Unix socket behind nginx**, not a TCP port: nginx owns port 80 and the name, and the app needs no privileges.
 - **mDNS CNAME** via [`mdns-publisher`](https://github.com/carlosefr/mdns-publisher) (`pip install mdns-publisher`, gives `mdns-publish-cname`): one host can answer to several `.local` names, one per service. This only works on the LAN; mDNS does not cross a tailnet.
 - **Health check as a hardware probe**: `/health` shells out to `hackrf_info` and looks for `Found HackRF`. Cheap, and it catches the usual failure (the USB device dropped off).
-- **No DSP at runtime.** The Pi 1 only replays a file. All the signal work happened ahead of time, on a laptop.
+- **No DSP at runtime.** The Pi 1 only replays a file. All the signal work happened ahead of time, on a laptop (Kabynut).
 
 ## The signal
 
@@ -100,7 +100,7 @@ There was no git repository, and the Pi held only the service: no notebook, no n
 
 1. Over ssh, it read the Pi's app, units, nginx site, the 2022 `README.rst`, and a hardware dump identifying the HackRF.
 2. It decoded both `.cs8` files blind with what became `tools/ook_inspect.py`: the `LLLLSSSS` pulse pattern, the -1.40 MHz offset, and the fact that the resynth was synthetic rather than a cleaned recording.
-3. Asked where the signal work happened, I remembered Jupyter in a phone browser. Nothing on the Pi, so a Spotlight search on my current laptop for the string `310500000` turned up the 2022 lab folder, with the notebook, lab notes, and every intermediate capture. The work had actually happened on the previous MacBook: Migration Assistant carried the folder over in December 2023 with its May 2022 creation dates intact, and the notebook was re-saved once on the new machine in March 2024 (hence Python 3.12 in its metadata).
+3. Asked where the signal work happened, I remembered Jupyter in a phone browser. Nothing on the Pi, so a Spotlight search on my current laptop (Darknut, an M3 Max) for the string `310500000` turned up the 2022 lab folder, with the notebook, lab notes, and every intermediate capture. The work had actually happened on its predecessor, Kabynut, my last Intel MacBook Pro: Migration Assistant carried the folder over in December 2023 with its May 2022 creation dates intact, and the notebook was re-saved once on the new machine in March 2024 (hence Python 3.12 in its metadata).
 4. The notebook confirmed the blind decode (pattern, offset, symbol clock) and corrected a few guesses, which is how this README ended up citing the notebook rather than paraphrasing a reconstruction.
 
 ## Original 2022 README
